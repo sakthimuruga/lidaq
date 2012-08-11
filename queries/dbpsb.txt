@@ -151,7 +151,7 @@ LIMIT 1000
 ##########################
 #### DB5
 #### union,distinct	
-#### [???]
+#### [included]
 ##########################
 
 # template	
@@ -789,11 +789,11 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX mbz: <http://purl.org/ontology/mbz#>
 SELECT DISTINCT ?var2 ?var3 
 { 
-  { ?var2 <http://www.w3.org/2004/02/skos/core#subject> %%var%%. } 
+  { ?var2 <http://purl.org/dc/terms/subject> %%var%%. } 
     UNION 
-  { ?var2 <http://www.w3.org/2004/02/skos/core#subject> <http://dbpedia.org/resource/Category:Prefectures_in_France>. } 
+  { ?var2 <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Prefectures_in_France>. } 
     UNION 
-  { ?var2 <http://www.w3.org/2004/02/skos/core#subject> <http://dbpedia.org/resource/Category:German_state_capitals>. } 
+  { ?var2 <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:German_state_capitals>. } 
   ?var2 <http://www.w3.org/2000/01/rdf-schema#label> ?var3. 
   FILTER (lang(?var3)='fr') 
 }	
@@ -823,8 +823,8 @@ PREFIX mbz: <http://purl.org/ontology/mbz#>
 SELECT DISTINCT ?var
 FROM <http://dbpedia.org> 
 { 
-  { ?var2 <http://www.w3.org/2004/02/skos/core#subject> ?var. } 
-  ?var2 <http://www.w3.org/2000/01/rdf-schema#label> ?var3. 
+  { ?var2 <http://purl.org/dc/terms/subject> ?var. } 
+  ?var2 <http://purl.org/dc/terms/subject> ?var3. 
   FILTER (lang(?var3)='fr') 
 }
 LIMIT 1000
@@ -1056,7 +1056,7 @@ LIMIT 1000
 ##########################
 #### DB24
 #### 4-TriplePatterns
-#### [???]
+#### [problems with ordering]
 ##########################
 
 # template	
