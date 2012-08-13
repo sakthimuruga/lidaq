@@ -1,9 +1,8 @@
 package ie.deri.urq.lodq;
 
 import ie.deri.urq.lidaq.CONSTANTS.REASONING_MODE;
-import ie.deri.urq.lidaq.http.SourceSelection.SOURCE_SELECTION;
 import ie.deri.urq.lidaq.query.OutputFormats;
-import ie.deri.urq.lodq.CLIObject;
+import ie.deri.urq.lidaq.source.SourceSelection.SOURCE_SELECTION;
 
 import java.util.Arrays;
 import java.util.logging.Logger;

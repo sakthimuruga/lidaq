@@ -6,7 +6,7 @@ import ie.deri.urq.lidaq.log.LIDAQLOGGER;
 import ie.deri.urq.lidaq.query.LTBQEQueryConfig;
 import ie.deri.urq.lidaq.repos.QueryBasedSourceSelectionStrategies;
 import ie.deri.urq.lidq.benchmark.BenchmarkSuite;
-import ie.deri.urq.lodq.Queries;
+import ie.deri.urq.lidq.benchmark.Queries;
 
 import java.io.File;
 import java.io.IOException;
@@ -66,7 +66,7 @@ public class TestBenchmark extends TestCase   {
 				,"-r",reas[2]
 //				,"-sA"
 //				,"-t","30"
-				,"-q", Queries.getQueryFile(queryRoot,query).getAbsolutePath()
+				,"-q", ie.deri.urq.lodq.Queries.getQueryFile(queryRoot,query).getAbsolutePath()
 		};
 		Main.main(arg);
 	}
