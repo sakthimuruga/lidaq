@@ -1,1 +1,151 @@
-test
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="lidaq" basedir="." default="help">
+  
+	<property name="comp.dir" value="components" />
+	<property name="lib.dir"  value="libs_common" />
+	<property name="lidaq.dir"  value="lidaq_libs" />
+	<property name="dist.dir" value="dist" />
+	
+	<property name="project.core.dir"    value="core" />
+	<property name="project.core.name"   value="lidaq_core" />
+	
+	<property name="project.webRep.dir"  value="web_repos" />
+	<property name="project.webRep.name" value="lidaq_web_repos" />
+	
+	<property name="project.proxy.dir"   value="ld_proxy" />
+	<property name="project.proxy.name"  value="lidaq_proxy" />
+	
+	<property name="project.live.dir"   value="live_query" />
+	<property name="project.live.name"  value="lidaq_live" />
+	
+	<property name="project.bench.dir"   value="benchmark" />
+		<property name="project.bench.name"  value="lidaq_bench" />
+	
+	<property name="project.webapp.dir"   value="webapp" />
+			<property name="project.webapp.name"  value="lidaq_webapp" />
+	
+	<target name="help">
+		<tstamp />
+		<echo>Available components</echo>
+		<echo>_________________________________________________________</echo>
+		<echo>  core - shared classes and constants for all components</echo>
+		<echo>  proxy - a simple LinkedData proxy server</echo>
+		<echo>  webrep - a implementation of a Web-based index</echo>
+		<echo>  querygen - a query generator</echo>
+		<echo>  bench - the benchmark suite</echo>
+		<echo>  live - a SPARQL query engine for live Linked Data querying</echo>
+		<echo>  webapp - a SPARQL query engine for live Linked Data querying</echo>
+		<echo>_________________________________________________________</echo>
+		<echo> e.g. #>ant core - to build the core package </echo>
+	</target>
+	
+	
+	<target name="clean">
+			<echo>=====================================</echo>
+			<echo>Cleaning up files in ${lidaq.dir}</echo>
+			<echo>=====================================</echo>
+		<delete dir="${lidaq.dir}"/>
+		<mkdir dir="${lidaq.dir}"/>
+	</target>
+	
+	
+	<target name="check-lib-exists">
+		
+	    <available file="${lidaq.dir}/${project.core.name}.jar" property="core.exists"/>
+		<available file="${lidaq.dir}/${project.webRep.name}.jar" property="webRep.exists"/>
+		
+		<available file="${lidaq.dir}/${project.proxy.name}.jar" property="proxy.exists"/>
+		<available file="${lidaq.dir}/${project.live.name}.jar" property="live.exists"/>
+		<available file="${lidaq.dir}/${project.bench.name}.jar" property="bench.exists"/>
+		<available file="${lidaq.dir}/${project.webapp.name}.jar" property="webapp.exists"/>
+	</target>
+
+	<target name="core" depends="check-lib-exists" unless="${core.exists}">
+		
+		<echo>=====================================</echo>
+		<echo>Build ${project.core.dir} package</echo>
+		<echo>=====================================</echo>
+		<ant antfile="${comp.dir}/${project.core.dir}/build.xml" inheritall="false">
+		  <property name="com.lib.dir" value="../../${lib.dir}"/>
+		<property name="PROJECT" value="${project.core.name}"/>
+		</ant>
+		<echo>Copy ${project.core.name}.jar to ${lidaq.dir}</echo>
+		<delete file="${lidaq.dir}/${project.core.name}.jar"/>
+		<copy file="${comp.dir}/${project.core.dir}/${dist.dir}/${project.core.name}.jar" tofile="${lidaq.dir}/${project.core.name}.jar"> </copy>
+	</target>
+	
+	<target name="webrep" depends="core" unless="${webRep.exists}">
+		<echo>=====================================</echo>
+		<echo>Build ${project.webRep.name} package</echo>
+		<echo>=====================================</echo>
+		<ant antfile="${comp.dir}/${project.webRep.dir}/build.xml" inheritall="false">
+			<property name="PROJECT" value="${project.webRep.name}"/>
+			<property name="CORE_LIB" value="${project.core.name}"/>
+			<property name="com.lib.dir" value="../../${lib.dir}"/>
+			<property name="lidaq.lib.dir" value="../../${lidaq.dir}"/>
+		</ant>
+		<echo>Copy ${project.webRep.name}.jar to ${lidaq.dir}</echo>
+		<delete file="${lidaq.dir}/${project.webRep.name}.jar"/>
+		<copy file="${comp.dir}/${project.webRep.dir}/${dist.dir}/${project.webRep.name}.jar" tofile="${lidaq.dir}/${project.webRep.name}.jar"> </copy>
+	</target>
+	
+	<target name="proxy" depends="core" unless="${core.exists}">
+		<echo>=====================================</echo>
+			<echo>Build ${project.proxy.name} package</echo>
+		<echo>=====================================</echo>
+			<ant antfile="${comp.dir}/${project.proxy.dir}/build.xml" inheritall="false">
+				<property name="PROJECT" value="${project.proxy.name}"/>
+				<property name="CORE_LIB" value="${project.core.name}"/>
+				<property name="lib.dir" value="../../${lidaq.dir}"/>
+			</ant>
+			<echo>Copy ${project.webRep.name}.jar to ${lidaq.dir}</echo>
+		<delete file="${lidaq.dir}/${project.proxy.name}.war"/>
+			<copy file="${comp.dir}/${project.proxy.dir}/${dist.dir}/${project.proxy.name}.war" tofile="${lidaq.dir}/${project.proxy.name}.war"> </copy>
+	</target>
+	
+	<target name="live" depends="webrep" unless="${live.exists}">
+				<echo>=====================================</echo>
+				<echo>Build ${project.live.dir} package</echo>
+				<echo>=====================================</echo>
+				<ant antfile="${comp.dir}/${project.live.dir}/build.xml" inheritall="false">
+					<property name="PROJECT" value="${project.live.name}"/>
+					<property name="WEBREP_LIB" value="${project.webRep.name}"/>
+					<property name="com.lib.dir" value="../../${lib.dir}"/>
+					<property name="lidaq.lib.dir" value="../../${lidaq.dir}"/>
+				</ant>
+				<echo>Copy ${project.live.name}.jar to ${lidaq.dir}</echo>
+			<delete file="${lidaq.dir}/${project.live.name}.jar"/>
+				<copy file="${comp.dir}/${project.live.dir}/${dist.dir}/${project.live.name}.jar" tofile="${lidaq.dir}/${project.live.name}.jar"> </copy>
+		</target>
+	
+	<target name="bench" depends="live" unless="${bench.exists}">
+		<echo>=====================================</echo>
+					<echo>Build ${project.bench.dir} package</echo>
+		<echo>=====================================</echo>
+					<ant antfile="${comp.dir}/${project.bench.dir}/build.xml" inheritall="false">
+						<property name="PROJECT" value="${project.bench.name}"/>
+						<property name="LIVE_LIB" value="${project.live.name}"/>
+						<property name="com.lib.dir" value="../../${lib.dir}"/>
+						<property name="lidaq.lib.dir" value="../../${lidaq.dir}"/>
+					</ant>
+					<echo>Copy ${project.bench.name}.jar to ${lib.dir}</echo>
+				<delete file="${lib.dir}/${project.bench.name}.jar"/>
+					<copy file="${comp.dir}/${project.bench.dir}/${dist.dir}/${project.bench.name}.jar" tofile="${lidaq.dir}/${project.bench.name}.jar"> </copy>
+			</target>
+	
+	<target name="webapp" depends="live" unless="${webapp.exists}">
+		<echo>=====================================</echo>
+		<echo>Build ${project.webapp.dir} package</echo>
+		<echo>=====================================</echo>
+		<ant antfile="${comp.dir}/${project.webapp.dir}/build.xml" inheritall="false">
+			<property name="PROJECT" value="${project.webapp.name}"/>
+			<property name="LIVE_LIB" value="${project.live.name}"/>
+			<property name="com.lib.dir" value="../../${lib.dir}"/>
+			<property name="lidaq.lib.dir" value="../../${lidaq.dir}"/>
+						</ant>
+						<echo>Copy ${project.webapp.name}.jar to ${lib.dir}</echo>
+					<delete file="${lib.dir}/${project.webapp.name}.jar"/>
+						<copy file="${comp.dir}/${project.webapp.dir}/${dist.dir}/${project.webapp.name}.war" tofile="${lidaq.dir}/${project.webapp.name}.war"> </copy>
+				</target>
+	
+</project>
