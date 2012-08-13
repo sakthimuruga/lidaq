@@ -1,0 +1,62 @@
+________| RESULT |________
+ #results: 1
+ time: 6011 ms 
+________| QUERY |_________
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX og: <http://opengraphprotocol.org/schema/>
+PREFIX rdfdata: <http://rdf.data-vocabulary.org/#>
+SELECT ?name ?avgRating
+WHERE {
+<http://www.rottentomatoes.com/m/harry_potter_and_the_deathly_hallows_part_2/> og:title ?o .
+OPTIONAL{
+	?s <http://rdf.data-vocabulary.org/#average>  ?avgRating .
+}
+}
+________| CONFIG |________
+ SourceSelection: SMART
+ ReasoningMode: OFF
+ Follow rdfs:seeAlso: false
+ Enable Any23 parsing: true
+___SourceLookupBenchmark___
+total_lookups = 1
+total_2xx_lookups = 1
+total_3xx_lookups = 0
+total_4xx_lookups = 0
+total_5xx_lookups = 0
+total_6xx_lookups = 0
+___WebRepositoryBenchmark___
+no_seed_URIs = 1
+follow_seeAlso = false
+follow_sameAs = false
+src_sel = SMART
+registered_keys = 2
+returned_stmts = 2
+cache_size = 2
+___QueryExecutionBenchmark___
+query_id = rt_film_rating.sparql_SMART_OFF
+sparql = PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX og: <http://opengraphprotocol.org/schema/>
+PREFIX rdfdata: <http://rdf.data-vocabulary.org/#>
+SELECT ?name ?avgRating
+WHERE {
+<http://www.rottentomatoes.com/m/harry_potter_and_the_deathly_hallows_part_2/> og:title ?o .
+OPTIONAL{
+	?s <http://rdf.data-vocabulary.org/#average>  ?avgRating .
+}
+}
+bench_dir = test/cli/rt_film_rating/rt_film_rating.sparql_SMART_OFF
+op_tree = (project (?name ?avgRating)
+  (conditional
+    (bgp (triple <http://www.rottentomatoes.com/m/harry_potter_and_the_deathly_hallows_part_2/> <http://opengraphprotocol.org/schema/title> ?o))
+    (bgp (triple ?s <http://rdf.data-vocabulary.org/#average> ?avgRating))))
+
+total_results = 1
+total_time = 5208
+first_result = 4586
+tp-1 = http://www.rottentomatoes.com/m/harry_potter_and_the_deathly_hallows_part_2/ @http://opengraphprotocol.org/schema/title ?o
+tp-1-VarBind = 0
+tp-1-SolBind = 1
+tp-2 = ?s @http://rdf.data-vocabulary.org/#average ?avgRating
+tp-2-VarBind = 1
+tp-2-SolBind = 1
+__________________________
