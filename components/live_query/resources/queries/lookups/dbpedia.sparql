@@ -1,0 +1,4 @@
+SELECT ?p ?o
+WHERE {
+  <http://dbpedia.org/resource/Dieter_Fensel> ?p ?o .
+}

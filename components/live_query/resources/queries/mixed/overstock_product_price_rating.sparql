@@ -1,0 +1,10 @@
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX og: <http://opengraphprotocol.org/schema/>
+PREFIX rdfdata: <http://rdf.data-vocabulary.org/#>
+SELECT ?name ?avgRating
+WHERE {
+<http://www.rottentomatoes.com/m/harry_potter_and_the_deathly_hallows_part_2/> og:title ?o .
+OPTIONAL{
+	?s <http://rdf.data-vocabulary.org/#average>  ?avgRating .
+}
+}

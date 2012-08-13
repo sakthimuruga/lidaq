@@ -1,0 +1,6 @@
+SELECT DISTINCT ?s0 ?joinSO01 ?joinSO00
+WHERE{
+?joinSO00 <http://rdfs.org/sioc/ns#account_of> <http://micro.cone.be/index.php/user/3> .
+?joinSO01 <http://rdfs.org/sioc/ns#follows> ?joinSO00 .
+?s0 <http://rdfs.org/sioc/ns#follows> ?joinSO01 .
+}

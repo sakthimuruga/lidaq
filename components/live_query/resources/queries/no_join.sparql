@@ -1,0 +1,7 @@
+SELECT *
+WHERE{
+?join_so_0_0 <p1> <A> .
+?join_so_0_1 <p2> ?join_so_0_0 .
+?join_so_1_0 <p4> <A> .
+GRAPH ?c {?join_so_1_1 <p5> ?join_so_1_0 .}
+}

@@ -1,0 +1,4 @@
+SELECT ?o
+WHERE{
+<http://www.informatik.uni-leipzig.de/~auer/foaf.rdf#me> <http://xmlns.com/foaf/0.1/title> ?o .
+}

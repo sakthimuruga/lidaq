@@ -1,0 +1,6 @@
+SELECT DISTINCT ?s0 ?s1
+WHERE{
+<http://funtter.com/user/4195> <http://xmlns.com/foaf/0.1/mbox_sha1sum> ?o0 .
+?s0 <http://xmlns.com/foaf/0.1/primaryTopic> <http://funtter.com/user/4195> .
+?s1 <http://xmlns.com/foaf/0.1/maker> <http://funtter.com/user/4195> .
+}

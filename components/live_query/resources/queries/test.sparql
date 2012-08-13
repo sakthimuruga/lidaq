@@ -1,0 +1,3 @@
+
+  <http://uldis.deri.ie/person_a.rdf#me> <http://xmlns.com/foaf/0.1/knows> ?knows . 
+  ?knows <http://xmlns.com/foaf/0.1/interest> ?i .

@@ -1,0 +1,6 @@
+SELECT DISTINCT ?s0 ?joinSO01 ?joinSO00
+WHERE{
+?joinSO00 <http://xmlns.com/foaf/0.1/knows> <http://keka.maalika.com/user/37> .
+?joinSO01 <http://xmlns.com/foaf/0.1/knows> ?joinSO00 .
+?s0 <http://xmlns.com/foaf/0.1/knows> ?joinSO01 .
+}

@@ -1,0 +1,6 @@
+SELECT DISTINCT ?o0
+WHERE{
+<http://www.kanzaki.com/ns/music#presents> <http://www.w3.org/2000/01/rdf-schema#comment> ?o0 .
+<http://www.kanzaki.com/ns/music#presents> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> ?o1 .
+<http://www.kanzaki.com/ns/music#presents> <http://www.w3.org/2000/01/rdf-schema#label> ?o2 .
+}

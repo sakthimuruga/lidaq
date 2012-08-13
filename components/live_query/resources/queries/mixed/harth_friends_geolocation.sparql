@@ -1,0 +1,10 @@
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+SELECT DISTINCT ?knows ?loc ?lat ?long
+WHERE {
+<http://harth.org/andreas/foaf#ah> foaf:knows ?knows . 
+?knows foaf:based_near ?loc .
+ ?loc geo:lat ?lat .
+ ?loc geo:long ?long .
+}

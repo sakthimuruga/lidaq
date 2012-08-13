@@ -1,0 +1,4 @@
+SELECT DISTINCT ?s0 ?op0w0
+WHERE{
+?s0 ?op0w0 <http://www.wasab.dk/morten/blog/archives/author/mortenf/skos.rdf#c23> .
+}

@@ -1,0 +1,8 @@
+SELECT DISTINCT *
+WHERE {
+{
+GRAPH ?c { ?sIn ?pIn <http://www.ontologyportal.org/SUMO.owl#SibyllaOfAnjou> . }
+}UNION{
+GRAPH ?c2 { <http://www.ontologyportal.org/SUMO.owl#SibyllaOfAnjou> ?pOut ?oOut .}
+}
+}

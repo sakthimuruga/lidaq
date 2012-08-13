@@ -1,0 +1,5 @@
+SELECT DISTINCT ?o0
+WHERE{
+<http://creationwiki.org/Special:URIResolver/Category-3AChristian_denomination> <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?joinOS00 .
+?joinOS00 <http://semantic-mediawiki.org/swivt/1.0#page> ?o0 .
+}

@@ -1,0 +1,14 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX eus: <http://ontologycentral.com/2009/01/eurostat/ns#>
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>
+
+SELECT ?value ?geo ?time
+WHERE {
+?s qb:dataset <http://estatwrap.ontologycentral.com/id/bsin_m#ds> ;
+eus:time ?time ;
+eus:geo ?geo ; 
+sdmx-measure:obsValue ?value ;
+eus:indic <http://estatwrap.ontologycentral.com/dic/indic#BS-ISPE> ;
+eus:s_adj <http://estatwrap.ontologycentral.com/dic/s_adj#SA> .
+}
