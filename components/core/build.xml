@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="lidaq_core" basedir="." default="dist">
+  
+	<!-- CONSTANTS -->
+	<property name="PROJECT" value="lidaq_core"/>
+	
+	<!-- DIRECTORIES -->
+	<property name="lib.dir" value="lib"/>  
+	<property name="com.lib.dir" value="lib"/>
+	<property name="dist.dir" value="dist"/>
+	<property name="build.dir" value="build"/>
+	<property name="src.dir" value="src"/>
+	<property environment="env"/>
+
+	
+  
+  	<path id="classpath">
+  		<fileset dir="${com.lib.dir}">
+  					<include name="**/*.jar"/>
+  					<exclude name="${junit.jar}"/>
+  				</fileset>
+		<pathelement path="${java.class.path}"/>
+	</path>
+  	
+	<target name="clean">
+		<tstamp />
+		<echo>Cleaning up</echo>
+		  		
+		<delete dir="${dist.dir}"/>
+		<delete dir="${build.dir}"/>
+	</target>
+	
+  	<target name="prepare">
+  		<echo>Preparing directories</echo>
+  		<mkdir dir="${build.dir}"/>
+  		<mkdir dir="${dist.dir}"/>
+  	</target>
+	  
+	<target name="copy">
+    	<!--<copy file="src/hashing/ie/deri/urq/realidy/hashing/us/hash.dat" tofile="${build.dir}/ie/deri/urq/realidy/hashing/us/hash.dat"> </copy>
+    	<copy file="src/log4j.properties" tofile="${build.dir}/log4j.properties"> </copy>
+    	<copy file="src/hashing/ie/deri/urq/realidy/hashing/us/hash.ini" tofile="${build.dir}/ie/deri/urq/realidy/hashing/us/hash.ini"> </copy>-->
+  	</target>  
+
+	<target name="dist" depends="clean, prepare,copy">
+    	<javac destdir="${build.dir}"
+	   		srcdir="${src.dir}"
+	   		debug="yes">
+	      <classpath refid="classpath"/>
+    	</javac>
+		<copy todir="${build.dir}/ie/deri/urq/lidaq/log">
+		  <fileset dir="configs">
+		     <include name="*.properties"/>
+		  </fileset>
+				
+		</copy>
+		<jar jarfile="${dist.dir}/${PROJECT}.jar" basedir="${build.dir}">
+			<zipfileset src="${com.lib.dir}/commons-cli-1.2.jar"/>
+						<zipfileset src="${com.lib.dir}/nxparser.jar"/>
+    	</jar>
+  	</target>
+</project>
