@@ -3,7 +3,6 @@
  */
 package ie.deri.urq.lidaq.source;
 
-import gumi.builders.UrlBuilder;
 import ie.deri.urq.lidaq.benchmark.SourceLookupBenchmark;
 import ie.deri.urq.lidaq.repos.WebRepository;
 
@@ -17,7 +16,6 @@ import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.apache.commons.httpclient.URIException;
 import org.semanticweb.yars.nx.Node;
 import org.semanticweb.yars.nx.Resource;
 import org.semanticweb.yars.nx.parser.Callback;
