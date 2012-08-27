@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="lidaq_webapp" basedir="." default="war">
+  
+	<!-- CONSTANTS -->
+	<property name="PROJECT" value="lidaq_webapp"/>
+	<property name="CORE" value="core"/>
+	<property name="VERSION" value="0.1"/>
+	<property name="DEV" value="dev"/>
+	<property name="LIVE_LIB" value="lidaq_live" />
+	
+	<!-- DIRECTORIES -->
+	<property name="lidaq.lib.dir" value="lib"/>
+	<property name="com.lib.dir" value="lib"/>
+	<property name="dist.dir" value="dist"/>
+	<property name="build.dir" value="build"/>
+	<property name="src.dir" value="src"/>
+	<property name="webapp.dir" value="webapp"/>
+	<property name="gwt.module.name" value="ie.deri.urq.lidaq.ui.LidaqUI"/>
+	<property name="server.resources.name" value="server_resources"/>
+	<property name="server.resources.dir" location="war/${server.resources.name}"/>
+	<property name="build.server.resources.dir" location="war/WEB-INF/classes/server_resources"/>        
+	<property name="lib.internal.dir" location="war/WEB-INF/lib"/>
+	<property name="gwt.client.dir" location="ie/deri/urq/lidaq/ui/client"/>
+
+	
+	
+  	<path id="classpath">
+  		<fileset dir="${lib.internal.dir}">
+  			<include name="**/*.jar"/>
+  		  	<exclude name="${junit.jar}"/>
+  		  					</fileset>
+  		<fileset dir="${lidaq.lib.dir}">
+			<include name="**/*.jar"/>
+			<exclude name="${junit.jar}"/>
+		</fileset>
+  		<fileset dir="${com.lib.dir}">
+  		<include name="**/*.jar"/>
+  					<exclude name="${junit.jar}"/>
+  				</fileset>
+		<pathelement path="${java.class.path}"/>
+	</path>
+  	
+	
+	<target name="clean">
+		<tstamp />
+		<echo>Cleaning up</echo>
+		<delete file="war/WEB-INF/lib/${LIVE_LIB}.jar" verbose="true" />
+		<delete dir="${dist.dir}"/>
+		<delete dir="war/WEB-INF/classes"/>
+		<delete dir="war/WEB-INF/deploy"/>
+    	<delete dir="${server.resources.dir}" />
+		<delete dir="${build.dir}"/>
+	</target>
+	
+  	<target name="prepare">
+  		<echo>Preparing directories</echo>
+  		<mkdir dir="${build.dir}"/>
+  		<mkdir dir="${dist.dir}"/>
+
+    	<mkdir dir="${server.resources.dir}" />
+
+  		<!--<mkdir dir="${webapps.dir}"/>-->
+  	</target>
+	  
+	<target name="copy">
+    	<!--<copy file="src/hashing/ie/deri/urq/realidy/hashing/us/hash.dat" tofile="${build.dir}/ie/deri/urq/realidy/hashing/us/hash.dat"> </copy>
+    	
+    	<copy file="src/hashing/ie/deri/urq/realidy/hashing/us/hash.ini" tofile="${build.dir}/ie/deri/urq/realidy/hashing/us/hash.ini"> </copy>
+		<copy file="ehcache.xml" tofile="${build.dir}/ehcache.xml"> </copy>-->
+  	</target>  
+
+	
+	
+	
+	
+	    <!-- Compile the java source code using javac -->
+	    <target name="compile" depends="prepare">        
+	        <javac srcdir="${src.dir}" destdir="${build.dir}">
+	            <classpath refid="classpath"/>
+	        </javac>        
+	    </target>       
+	    <!-- Invoke the GWT compiler to create the Javascript for us -->
+	   <target name="gwt-compile" depends="compile">
+	        <java failonerror="true" fork="true" classname="com.google.gwt.dev.Compiler">
+	            <classpath>
+	                <!-- src dir is added to ensure the module.xml file(s) are on the classpath -->
+	                <pathelement location="${src.dir}"/>                
+	                <pathelement location="${build.dir}"/>
+	                <path refid="classpath"/>
+	            </classpath>
+	            <jvmarg value="-Xmx256M"/>
+	            <arg value="${gwt.module.name}"/>
+	         </java>
+	     </target>
+	    <!-- Package the compiled Java source into a JAR file -->
+	    <target name="jar" depends="compile">        
+	        <jar jarfile="${lib.internal.dir}/${PROJECT}.jar" basedir="${build.dir}/">
+	            <!-- Don't wrap any of the client only code into the JAR -->
+	            <exclude name="${gwt.client.dir}/**/*.class"/>
+	        </jar>    
+	    </target>
+	    <!-- Copy the static server resources into the required 
+	    directory ready for packaging -->    
+	    <target name="copy-resources">
+	        <copy todir="${build.server.resources.dir}" preservelastmodified="true">
+	            <fileset dir="${server.resources.dir}"/>            
+	        </copy>
+	    	 
+	    	
+	    </target>    
+	    <!-- Package the JAR file, Javascript, static resources 
+	    and external libraries into a WAR file -->
+	    <target name="war" depends="gwt-compile, jar, copy-resources">
+	    	
+	    	<copy file="${lidaq.lib.dir}/${LIVE_LIB}.jar" tofile="war/WEB-INF/lib/${LIVE_LIB}.jar" /> 
+	        <war basedir="war" destfile="${dist.dir}/${PROJECT}.war" webxml="war/WEB-INF/web.xml">
+	            <exclude name="WEB-INF/**" />
+	            <exclude name="${server.resources.name}/**"/>
+	            <webinf dir="war/WEB-INF/">
+	                <include name="classes/${server.resources.name}/**" />
+	                <include name="**/*.jar" />
+	            	<include name="${lib.internal.dir}/${PROJECT}.jar" />
+	            	<include name="${lidaq.lib.dir}/${LIVE_LIB}.jar"/>
+	                <exclude name="**/gwt-dev.jar" />
+	                <exclude name="**/gwt-user.jar" />
+	            </webinf>
+	        </war>
+	    </target> 
+	
+	<!-- Abort the build if TOMCAT_HOME is not set -->
+	<target name="checkTomcatHome" unless="env.TOMCAT_HOME">
+	   <fail message="TOMCAT_HOME must be set!"/>
+	</target>
+
+	<!-- Deploy the WAR file to TOMCAT_HOME\webapps -->
+	<target name="deploy" depends="checkTomcatHome,war">
+		<echo>Deploying to ${env.TOMCAT_HOME}</echo>
+	    <copy file="${dist.dir}/${PROJECT}.war" todir="${env.TOMCAT_HOME}/webapps"/>
+	</target>
+</project>
