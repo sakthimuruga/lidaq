@@ -1,0 +1,94 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:HTMLPanel>
+		<g:FormPanel ui:field='qForm' action='sparql?'>
+			<g:FlowPanel ui:field="queryForm" styleName="header box">
+				<g:HTML>
+					<h2>SPARQL Query</h2>
+					<span id="format">Output Format:</span>
+				</g:HTML>
+				<g:ListBox ui:field='resFormat' name="accept" visibleItemCount="1">
+
+				</g:ListBox>
+
+				<g:TextArea ui:field='query' name="query"/>
+				<g:HTMLPanel ui:field="tmpl" styleName="tmpl">
+					<g:Label>
+						Select template query:
+					</g:Label>
+					<g:ListBox ui:field="tmplQuery" visibleItemCount="1">
+					</g:ListBox>
+				</g:HTMLPanel>
+				<g:HTML>
+					<h2>Options</h2>
+				</g:HTML>
+				<g:HTMLPanel ui:field="lidaq" styleName="options">
+					<g:Label addStyleNames="left">Source Selection</g:Label>
+					<g:ListBox addStyleNames="left" ui:field="srcSel" name="srcSel"
+						visibleItemCount="1"></g:ListBox>
+					<g:Label addStyleNames="left">Links:</g:Label>
+					<g:ListBox ui:field="links" visibleItemCount="1" addStyleNames="left">
+					</g:ListBox>
+
+					<g:Label addStyleNames="left">Reasoning</g:Label>
+
+					<g:ListBox ui:field="reasoning" addStyleNames="left">
+					
+					</g:ListBox>
+					<g:Label addStyleNames="left">Any23</g:Label>
+
+					<g:ListBox ui:field="any23" addStyleNames="left">
+					
+					</g:ListBox>
+				</g:HTMLPanel><!-- liaq -->
+
+
+				<g:HorizontalPanel ui:field="sparqlEP" styleName="options">
+					<g:HTML>
+						<input type="checkbox" name="sparqlEP" value="sparqlEP" />
+						SPARQL Endpoint:
+					</g:HTML>
+
+					<g:ListBox ui:field="ep">
+					</g:ListBox>
+				</g:HorizontalPanel><!-- sparqlEP -->
+				<g:Button ui:field="execBtn">Run Query</g:Button>
+
+			</g:FlowPanel>  <!-- queryForm -->
+		</g:FormPanel>
+		<g:VerticalPanel ui:field="debugPanel" styleName="hide">
+			<g:HTML>
+				<h2>Query</h2>
+			</g:HTML>
+			
+			<g:TextArea ui:field="debugQuery"></g:TextArea>
+			<g:HTML>
+				<h2 id="processH2">Processing</h2>
+			</g:HTML>
+
+			<g:FlexTable ui:field="debugTbl" styleName="fancy"></g:FlexTable>
+
+		</g:VerticalPanel>
+		<g:VerticalPanel ui:field="resultPanel" styleName="header box hide fancy">
+			<g:HTML>
+				<h2 id="resultH2">Results</h2>
+			</g:HTML>
+
+			<g:VerticalPanel ui:field="resultTbl">
+			
+			</g:VerticalPanel>
+
+		</g:VerticalPanel>
+
+		<g:VerticalPanel ui:field="errorPanel" styleName="header box hide">
+			<g:HTML>
+				<h2>ERROR</h2>
+			</g:HTML>
+			<g:Label ui:field="errorCls"></g:Label>
+			<g:HTMLPanel ui:field="errorTxt"></g:HTMLPanel>
+
+		</g:VerticalPanel>
+
+	</g:HTMLPanel>
+</ui:UiBinder> 

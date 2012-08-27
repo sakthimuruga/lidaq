@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>LODQ - SPARQL Query Interface</title>
+	<link rel="stylesheet" href="lodq.css" type="text/css" />
+</head>
+
+<body>
+
+<div id="header">
+<div id="headerCNT">
+<p><a href="index.html" title="Index"><span id="short">LiDaQ</span> <span id="full">Linked (Open) Data Query Processor</span></p></a>
+</div>
+</div>
+
+<div id="menu">
+<ul>
+    <li class="main"><a href="query.html" title="Query">Query UI</a>
+	</li>
+    <li class="main"><a href="about.html" title="About">About</a></li>
+</ul>
+</div>
+
+
+<div id="content">
+<div id="contentCNT">
+    
+    <form action='sparql?' accept-charset="utf-8" method='get' name='qform'>
+    <div class="frame frameQuery">
+		<h2>Query</h2>
+		<div class="frameQueryCNT">
+    
+			<textarea name='query'>
+PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; 
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
+PREFIX sioc: &lt;http://rdfs.org/sioc/ns#&gt; 
+			
+SELECT DISTINCT *
+WHERE { 
+			
+}
+LIMIT 200
+			</textarea>
+		</div>
+	</div>
+	<div class="frame frameOpts">
+	<h2>Options</h2>
+	<div class="frameCNT frameOptsCNT">
+	<hr>
+	Source Selection:
+    <select name="srcSel">
+		<option value="all">all appearing URIs</option>
+    	<option value="so">only subj%obj URIs</option>
+    	<option value="smart">query depenend</option>
+	</select>
+	<hr>
+	Recall Improvement:
+	<div>
+		<input type="checkbox" name="seeAlso"">consider rdfs:seeAlso links</input>
+		<input type="checkbox" name="sameAs"">consider owl:sameAs links</input>
+		<input type="checkbox" name="rdfs"">enable RDFS reasoning</input>
+	</div>
+	<hr>
+	Return Format:
+    	<select name="accept">
+    		<option value="application/rdf+xml">application/rdf+xml</option>
+    		<option value="application/sparql-results+xml">application/sparql-results+xml</option>
+    		<option value="application/sparql-results+json">application/sparql-results+json</option>
+    		<option value="text/plain">text/plain</option>
+		</select>
+    </div>
+	</div>
+	<!--
+	<div id="proxy">
+		<h2 >Use Proxy</h2>
+		http.proxyHost: <input disabled="disabled" type="text" name="http.proxyHost" /><br />
+		http.proxyPort: <input disabled="disabled" type="text" name="http.proxyPort" /><br />
+  		Authentification:<br />
+  		http.proxyUser: <input disabled="disabled" type="text" name="http.proxyUser" /><br />
+  		http.proxyPassword: <input disabled="disabled" type="password" name="http.proxyPassword" /><br />
+	</div>
+	-->
+    <div class="frame frameSubmit">
+    	  <div class="frameCNT frameSubmitCNT">
+    	<input type='reset'/> <input type='submit'/>
+    </div>
+    </div>
+    </form>
+</div>
+</div>
+<div id="footer">
+<div id="footerCNT">
+<p><span id="copy">Maintained by: <span id="name"><a href="http://www.deri.ie/about/team/member/j%FCrgen_umbrich/">juergen.umbrich</a></span> at <span id="rest"><a href="http://www.deri.ie/">deri.org</a></span></span></p>
+<img id="deriLogo" src="deri-logo.jpg"></img><img id="deriLogo" src="nuig.jpg"></img></img><img src="kit.jpg"></img>
+</div>
+</div>
+</body>
+</html>

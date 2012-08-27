@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>LiDaQ</title>
+	 <link type="text/css" rel="stylesheet" href="lidaq.css">
+	 <script type="text/javascript" language="javascript" src="lidaqwebapp/lidaqwebapp.nocache.js"></script>
+</head>
+
+<body>
+	<div id="container">
+    <div id="header" class="header">
+		<h1>
+			LiLiDaQ
+			<span class="ul">Li</span>ve 
+			<span class="ul">Li</span>nked 
+			<span class="ul">Da</span>ta 
+			<span class="ul">Q</span>uery Engine
+		</h1>
+		<nav>
+		<ul>
+		<li>
+			<a href="">LiLiDaQ</a>
+		</li>
+		<li>
+			<a href="">Hybrid</a>
+		</li>
+		<li>
+			<a href="about.html">About</a>
+		</li>
+		</ul>
+		</nav>        
+    </div>
+    <div id="content">
+     
+     <form action="sparql" id="qForm">
+			<div id="queryForm" class="header box">
+				<div>
+					<h2>SPARQL Query</h2>
+					<span id="format">Output Format:</span>
+				</div>
+				<select id='resFormat' name="accept" visibleItemCount="1">
+
+				</select>
+
+				<textarea id="query" name="query" ></textarea>
+				<div class="tmpl">
+					<div>
+						Select template query:
+					</div>
+					<select id="tmplQuery" size="1">
+					</select>
+				</div>
+				<div>
+					<h2>Options</h2>
+				</div>
+				<div id="lidaq" class="options">
+					<div class="label left">Source Selection</div>
+					<select class="left" id="srcSel" name="srcSel"
+						visibleItemCount="1"></select>
+					<div class="label left">Links:</div>
+					<select id="links" visibleItemCount="1" addStyleNames="left">
+					</select>
+
+					<div class="label left">Reasoning</div>
+
+					<select id="reasoning" addStyleNames="left">
+					
+					</select>
+					<div class="label left">Any23</div>
+
+					<select id="any23" addStyleNames="left">
+					
+					</select>
+				</div><!-- liaq -->
+
+
+				<div id="sparqlEP" styleName="options">
+					<div>
+						<input type="checkbox" name="sparqlEP" value="sparqlEP" />
+						SPARQL Endpoint:
+					</div>
+
+					<select id="ep">
+					</select>
+				</div><!-- sparqlEP -->
+				<input type="button" id="execBtn" value="Run Query"/>
+
+			</div>  <!-- queryForm -->
+		</form>
+	</div>
+        <div id="footer">
+
+       <div id="copy">Maintained by: <span id="name"><a href="http://www.deri.ie/about/team/member/j%FCrgen_umbrich/">juergen.umbrich</a></span> at <span id="rest"><a href="http://www.deri.ie/">deri.org</a></span></div><div id="img">
+       <img src="http://www.deri.ie/fileadmin/images/elements/deri_ie_head.gif"/>
+              <img src="http://www.deri.ie/fileadmin/images/design/nuig_logo.gif"/></div>
+   </div>
+</div>
+</body>
+</html>

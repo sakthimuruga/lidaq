@@ -1,0 +1,30 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:HTMLPanel>
+		
+			<h1>
+				LiLiDaQ
+				<span class="ul">Li</span>ve 
+				<span class="ul">Li</span>nked 
+				<span class="ul">Da</span>ta 
+				<span class="ul">Q</span>uery Engine
+			</h1>
+			<nav>
+			<ul>
+			<li>
+				<g:Hyperlink targetHistoryToken="LiLiDaQ" ui:field="lilidaq">LiLiDaQ</g:Hyperlink>
+			</li>
+			<li>
+				<g:Hyperlink targetHistoryToken="Hybrid" ui:field="hybrid">Hybrid</g:Hyperlink>
+			</li>
+			<li>
+				<g:Hyperlink targetHistoryToken="About" ui:field="about">About</g:Hyperlink>
+			</li>
+			</ul>
+			</nav>
+		
+		
+
+	</g:HTMLPanel>
+</ui:UiBinder> 
