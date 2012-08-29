@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="lidaq_web_repos" basedir="." default="dist">
+  
+	<!-- CONSTANTS -->
+	<property name="PROJECT" value="lidaq_web_repos"/>
+	<property name="CORE_LIB" value="lidaq_core"/>
+	
+	<!-- DIRECTORIES -->
+	<property name="com.lib.dir" value="lib"/>
+	<property name="lib.dir" value="lib"/>  
+	<property name="dist.dir" value="dist"/>
+	<property name="build.dir" value="build"/>
+	<property name="src.dir" value="src"/>
+	<property name="lidaq.lib.dir" value="lib"/>
+	
+	<!-- REQUIRED LIBRAARIES -->
+	
+	<property environment="env"/>
+
+	
+  	<path id="classpath">
+  		<fileset dir="${com.lib.dir}">
+			<include name="**/*.jar"/>
+			<exclude name="${junit.jar}"/>
+		</fileset>
+  		<fileset dir="${lib.dir}">
+  					<include name="**/*.jar"/>
+  					<exclude name="${junit.jar}"/>
+  				</fileset>
+  		<fileset dir="${lidaq.lib.dir}">
+  			<include name="**/*.jar"/>
+  			<exclude name="${junit.jar}"/>
+  		</fileset>
+		<pathelement path="${java.class.path}"/>
+	</path>
+  	
+	<target name="clean">
+		<tstamp />
+		<echo>Cleaning up</echo>
+		<delete dir="${dist.dir}"/>
+		<delete dir="${build.dir}"/>
+	</target>
+	
+  	<target name="prepare">
+  		<echo>Preparing directories</echo>
+  		<mkdir dir="${build.dir}"/>
+  		<mkdir dir="${dist.dir}"/>
+  	</target>
+	  
+	<target name="copy">
+    	<!--<copy file="src/hashing/ie/deri/urq/realidy/hashing/us/hash.dat" tofile="${build.dir}/ie/deri/urq/realidy/hashing/us/hash.dat"> </copy>
+    	<copy file="src/log4j.properties" tofile="${build.dir}/log4j.properties"> </copy>
+    	<copy file="src/hashing/ie/deri/urq/realidy/hashing/us/hash.ini" tofile="${build.dir}/ie/deri/urq/realidy/hashing/us/hash.ini"> </copy>-->
+  	</target>  
+
+	<target name="dist" depends="clean, prepare, copy">
+		<echo>${lib.dir}</echo>
+    	<javac destdir="${build.dir}"
+	   		srcdir="${src.dir}"
+	   		debug="yes">
+	      <classpath refid="classpath"/>
+    	</javac>
+		<copy todir="${build.dir}/resources">
+		    <fileset dir="${src.dir}/resources"/>
+		</copy>
+		
+		<jar jarfile="${dist.dir}/${PROJECT}.jar" basedir="${build.dir}">
+			<zipfileset src="${com.lib.dir}/ldspider-trunk-lib.jar"/>
+			
+			<zipfileset src="${com.lib.dir}/commons-logging-1.1.1.jar"/>
+			
+			<zipfileset src="${com.lib.dir}/fluent-hc-4.2-beta1.jar"/>
+			<zipfileset src="${com.lib.dir}/httpclient-4.2-beta1.jar"/>
+			<zipfileset src="${com.lib.dir}/httpclient-cache-4.2-beta1.jar"/>
+			<zipfileset src="${com.lib.dir}/httpcore-4.2-beta1.jar"/>
+			<zipfileset src="${com.lib.dir}/httpmime-4.2-beta1.jar"/>
+			
+			<!--
+			<zipfileset src="${com.lib.dir}/httpclient-4.0.1.jar"/>
+			<zipfileset src="${com.lib.dir}/httpcore-4.0.1.jar"/>
+			<zipfileset src="${com.lib.dir}/httpcore-nio-4.0.1.jar"/>
+			<zipfileset src="${com.lib.dir}/httpmime-4.0.1.jar"/>
+			-->
+			
+			<zipfileset src="${lidaq.lib.dir}/${CORE_LIB}.jar"/>
+			<zipfileset src="${lib.dir}/saorr-0.1-dev.jar"/>
+			<zipfileset src="${lib.dir}/nxindex-0.8.jar"/>
+			<zipfileset src="${lib.dir}/any23-core-current.jar"/>
+    	</jar>
+  	</target>
+</project>
